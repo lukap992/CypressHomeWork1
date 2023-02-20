@@ -15,6 +15,9 @@ class AllGalleries{
     get singleGallery(){
         return cy.get(".cell")
     }
+    get authorGalleryPage(){
+        return cy.get(".box-title")
+    }
     get singleGalleryTitle(){
         return this.singleGallery.find("h2");
     }

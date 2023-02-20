@@ -1,3 +1,4 @@
+
 class RegisterPage{
     get firstNameInput(){
         return cy.get("#first-name")
@@ -29,5 +30,29 @@ class RegisterPage{
         this.tosCheckBox.check(checkbox)
         this.submitButton.click()
     }
+    registerWithoutFirstName(lastName, email, passwordInput, passwordConfirmation, checkbox ){
+        this.lastNameInput.type(lastName)
+        this.emailInput.type(email)
+        this.passwordFiled.type(passwordInput)
+        this.passwordConfirmationI.type(passwordConfirmation)
+        this.tosCheckBox.check(checkbox)
+        this.submitButton.click()
+    }
+    registerWithoutLastName(firstName, email, passwordInput, passwordConfirmation, checkbox ){
+        this.firstNameInput.type(firstName)
+        this.emailInput.type(email)
+        this.passwordFiled.type(passwordInput)
+        this.passwordConfirmationI.type(passwordConfirmation)
+        this.tosCheckBox.check(checkbox)
+        this.submitButton.click()
+    }
+    registerWithoutPasswordFields(firstName, lastName, email, checkbox ){
+        this.firstNameInput.type(firstName)
+        this.lastNameInput.type(lastName)
+        this.emailInput.type(email)
+        this.tosCheckBox.check(checkbox)
+        this.submitButton.click()
+    }
+
 }
 export const registerPage = new RegisterPage()

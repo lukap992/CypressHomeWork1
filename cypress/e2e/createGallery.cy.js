@@ -4,6 +4,7 @@ import { createGallery} from "../object_models/createGallery"
 import { allGalleries } from '../object_models/allGalleries.js'
 import { navigation } from '../object_models/Navigacija.js'
 
+
 const credentials1 = {
     title: "slk",
     description: "slk",
@@ -47,8 +48,18 @@ const credentials8 = {
     secondUrl: "http://vokainformatika.weebly.com/uploads/5/9/5/4/59544817/5471847.jpg?230"
 }
 const credentials9 = {
-    imageUrl: "http://vokainformatika.weebly.com/uploads/5/9/5/4/59544817/5471847.jpg?230"
+    title: "PSV",
+    description: 'positive',
+    imageUrl: "https://tinyjpg.com/images/social/website.jpg",
+    imagePng: "https://cdn.pixabay.com/photo/2015/10/01/17/17/car-967387__480.png"
 }
+const credentials10 = {
+    title:"Negative test case",
+    description: "Negative",
+    imageUrl: "/"
+    
+}
+
 const credentials = {
     userEmail: "lukap@map.com",
     userPassword: "luka1234"
@@ -97,21 +108,37 @@ describe("visit app and login", () => {
         cy.url().should("not.contain", "/login")
         createGallery.gallery(credentials6.title, credentials6.description, credentials6.imageUrl)
     })
-    it('Try to create a gallery by providing only one letter in the title field', () => {
+    it.only('Try to create a gallery by providing only one letter in the title field', () => {
         navigation.clickCreateGalleryBtn()
         createGallery.gallery(credentials7.title, credentials7.description, credentials7.imageUrl)
+        
+
+
+        
     })
-    it.only("Try to create a gallery by adding two images at the same time with valid data.", () => {
+    it("Try to create a gallery by adding two images at the same time with valid data.", () => {
         navigation.clickCreateGalleryBtn()
         createGallery.addImageBtn.click()
         createGallery.gallery1(credentials8.title, credentials8.description, credentials8.imageUrl, credentials8.secondUrl)
         cy.should('have.text', "Submit")
         cy.url().should("not.contain", "/create")
         cy.url().should("not.contain", "/login")
- 
 
     });
-      
+
+    it('Try to create gallery by leaving the image URL field empty', () => {
+        navigation.clickCreateGalleryBtn()
+        createGallery.gallery(credentials10.title, credentials10.description, credentials10.imageUrl)
+        cy.url().should("include", "/create")
+    })
+    it("try to add one url fromat of an image and one png format of an image at the same time", () => {
+        navigation.clickCreateGalleryBtn();
+        cy.url().should("contain", "create");
+        createGallery.addImageBtn.click();
+        createGallery.gallery1(credentials9.title, credentials9.description, credentials9.imageUrl, credentials9.imagePng);
+        
+
+    })
     
     
     
